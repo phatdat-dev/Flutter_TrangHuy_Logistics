@@ -1,0 +1,140 @@
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:package_core/package_core.dart';
+
+import '../../packages/curved_navigation_bar/curved_navigation_bar.dart';
+import '../notification/controller/notification_controller.dart';
+import 'home/controller/home_controller.dart';
+
+class ScaffoldCurvedBottomnavView extends StatefulWidget {
+  const ScaffoldCurvedBottomnavView(this.navigationShell, this.children, {super.key});
+
+  final StatefulNavigationShell navigationShell;
+  final List<Widget> children;
+
+  @override
+  State<ScaffoldCurvedBottomnavView> createState() => _ScaffoldCurvedBottomnavViewState();
+}
+
+class _ScaffoldCurvedBottomnavViewState extends State<ScaffoldCurvedBottomnavView> {
+  @override
+  void initState() {
+    GetIt.instance.refresh(() => HomeController()..onInitData());
+    GetIt.instance.refresh(() => NotificationController()..onInitData());
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) => requestIOSAppTrackingTransparency());
+    super.initState();
+  }
+
+  /*
+
+  Future<void> showCustomTrackingDialog(BuildContext context) async {
+    // Implement your custom tracking dialog here
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: const Text("Theo dõi tính minh bạch"),
+          content: const Text(
+            '''Chúng tôi sẽ mở đến tùy chọn cho phép theo dõi tính minh bạch thông tin của bạn, nhằm để phục vụ trải nghiệm tốt nhất, để xác thực các thông tin như ID thiết bị, Số điện thoại...
+            \nCác thông tin bạn khai báo khi đặt vé nếu không chính xác có thể dẫn đến phiền phức rất lớn đó !''',
+          ),
+          actions: <Widget>[
+            TextButton(child: const Text("OK", style: TextStyle(fontWeight: FontWeight.bold)), onPressed: () => Navigator.of(context).pop()),
+          ],
+        );
+      },
+    );
+  }
+
+  void requestIOSAppTrackingTransparency() async {
+    // If the system can show an authorization request dialog
+    if (await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+      // Show a custom explainer dialog before the system dialog
+      await showCustomTrackingDialog(context);
+      // Wait for dialog popping animation
+      await Future.delayed(const Duration(milliseconds: 200));
+      // Request system's tracking authorization dialog
+      await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+  }
+
+*/
+  @override
+  void dispose() {
+    GetIt.instance.unregister<HomeController>();
+    GetIt.instance.unregister<NotificationController>();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      //huy keyboard khi bam ngoai man hinh
+      onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
+      child: Scaffold(
+        // resizeToAvoidBottomInset: true,
+        // extendBody: true,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: Stack(
+          children:
+              widget.children.mapIndexed((int index, Widget navigator) {
+                return AnimatedScale(
+                  scale: index == widget.navigationShell.currentIndex ? 1 : 1.5,
+                  duration: const Duration(milliseconds: 150),
+                  child: AnimatedOpacity(
+                    opacity: index == widget.navigationShell.currentIndex ? 1 : 0,
+                    duration: const Duration(milliseconds: 150),
+                    child: IgnorePointer(
+                      ignoring: index != widget.navigationShell.currentIndex,
+                      child: TickerMode(enabled: index == widget.navigationShell.currentIndex, child: navigator),
+                    ),
+                  ),
+                );
+              }).toList(),
+        ),
+        //Footer
+        bottomNavigationBar: BottomNavigationWidget(widget.navigationShell),
+      ),
+    );
+  }
+}
+
+class BottomNavigationWidget extends StatelessWidget {
+  const BottomNavigationWidget(this.navigationShell, {super.key});
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  Widget build(BuildContext context) {
+    return CurvedNavigationBar(
+      backgroundColor: Colors.transparent,
+      color: Theme.of(context).colorScheme.primary,
+      // buttonBackgroundColor: Theme.of(context).primaryColor,
+      // buttonLabelColor: Colors.white,
+      animationDuration: const Duration(milliseconds: 300),
+      height: Globals.isIos ? 80 : 65,
+      onTap:
+          (index) => navigationShell.goBranch(
+            index,
+            // A common pattern when using bottom navigation bars is to support
+            // navigating to the initial location when tapping the item that is
+            // already active. This example demonstrates how to support this behavior,
+            // using the initialLocation parameter of goBranch.
+            initialLocation: index == navigationShell.currentIndex,
+          ),
+      items:
+          {"Home": MingCute.home_5_line, "Wallet": MingCute.wallet_4_line, "Track": MingCute.car_line, "Profile": MingCute.user_3_line}.entries
+              .map(
+                (e) => CurvedNavigationBarItem(
+                  icon: Icon(e.value, color: Colors.white, size: 30),
+                  label: Text(e.key, style: const TextStyle(color: Colors.white, fontSize: 12), maxLines: 1, overflow: TextOverflow.ellipsis),
+                ),
+              )
+              .toList(),
+    );
+  }
+}

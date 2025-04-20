@@ -1,0 +1,160 @@
+name: tranghuy_logistics_staff
+description: A new Flutter project.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.1+1
+
+environment:
+  sdk: 3.7.2
+  flutter: 3.29.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: any
+  #Dio for Api Calling
+  dio: any
+  logger: any
+  #
+  go_router: ^13.2.5 # 14.4.1 nó đang lỗi popUntil
+  # Language
+  easy_localization: any
+  # support dart core
+  intl: any
+  collection: any #array, List method
+  dartz: any
+  package_info_plus: any #get package info
+  equatable: any
+  path: any
+  flutter_dotenv: any
+  upgrader: any
+  tiengviet: any
+
+  #FireBase
+  firebase_core: any
+  firebase_remote_config: any
+  firebase_messaging: any
+  flutter_local_notifications: any
+  # LocalDB
+  shared_preferences: any
+  sqflite: any
+  #
+  get_it: any
+  provider: any
+  # native
+  # device_info_plus: any #get device infocollection: any #array, List method
+  path_provider: any
+  image_picker: any
+  file_picker: any
+  connectivity_plus: any
+  # open_file_plus:
+  #   git:
+  #     url: https://github.com/postflow/open_file_plus.git
+  #     ref: main
+  # permission_handler: any
+  # external_app_launcher: any
+  # Widget util
+  flutter_svg: any
+  cached_network_image: any
+  shimmer: any # animate loading
+  # lottie: any
+  animate_do: any
+  flip_card: any # animation
+  # like_button: any
+  # animated_tree_view: any
+  # avatar_glow: any # cho hiệu ứng glow cái mic
+  pin_code_fields: any #pin code, giảm thiểu xử lý việc nhập sai
+  toastification: any #show toast error
+  timeline_tile: any
+  path_drawing: any
+  flutter_slidable: any
+  # paged_vertical_calendar: any
+  # full_calender: any # Lunar, Solar convert
+  # docx_template: any
+  numberpicker: any
+  # syncfusion_flutter_charts: any
+  syncfusion_flutter_pdf: any # tạo file pdf
+  # syncfusion_flutter_pdfviewer: any # xem file pdf
+  # wolt_modal_sheet: any # better dialog
+  chatview: ^2.4.0
+  showcaseview: any
+  icons_plus: any
+  #
+  flutter_form_builder: any #bingding form
+  form_builder_validators: any
+  # BarCode
+  # mobile_scanner: any
+  # syncfusion_flutter_barcodes: any
+  # printing: any
+  # pdf_image_renderer: any # pdf_to_image_converter
+  # Link web
+  url_launcher: any
+  flutter_inappwebview: any # webview
+  # google_generative_ai: any
+  # syncfusion_flutter_datagrid: any
+  # scrollable_positioned_list: any #scroll to index
+  # palette_generator: any
+  #
+  #
+  flutter_core_datz:
+    git:
+      url: https://github.com/phatdat-dev/flutter_core_datz
+      ref: master
+  package_core:
+    path: ../package_core
+  # flutter_dynamic_filter:
+  #   git:
+  #     url: https://github.com/phatdat-dev/flutter_dynamic_filter
+  #     ref: main
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  flutter_lints: any
+  # mockito: any #test
+  # http_mock_adapter: any #test
+  build_runner: any
+  flutter_native_splash: any
+  flutter_launcher_icons: any # flutter pub run flutter_launcher_icons
+  go_router_builder: any
+  flutter_gen_runner: any # dart pub global activate flutter_gen
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+dependency_overrides:
+  intl: ^0.20.0
+
+flutter_gen:
+  output: lib/generated/ # Optional (default: lib/gen/)
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  generate: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    # - .env
+    - assets/gif/
+    - assets/icons/
+    - assets/images/
+    - assets/images/loading/
+    - assets/images/authenication/
+    # - assets/lottie/
+    - assets/svg/
+    - assets/translations/
+
+  # fonts:
+  #   - family: MerriWeather
+  #     fonts:
+  #       - asset: fonts/merri_weather/Merriweather-Black.ttf
+  #       - asset: fonts/merri_weather/Merriweather-Bold.ttf
+  #   - family: Mulish
+  #     fonts:
+  #       - asset: fonts/mulish/Mulish-Bold.ttf
+  #       - asset: fonts/mulish/Mulish-Regular.ttf
