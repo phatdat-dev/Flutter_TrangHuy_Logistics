@@ -40,7 +40,7 @@ class _FormBuilderTextFieldPasswordWidgetState extends State<FormBuilderTextFiel
         prefixIcon: Icon(Icons.lock_outline, color: context.theme.unselectedWidgetColor),
         suffixIcon: IconButton(
           onPressed: () => setState(() => _isVisiblePassword = !_isVisiblePassword),
-          icon: Icon(_isVisiblePassword ? Icons.visibility : Icons.visibility_off, size: 24.0, color: context.theme.unselectedWidgetColor),
+          icon: Icon(_isVisiblePassword ? Icons.visibility_off : Icons.visibility, size: 24.0, color: context.theme.unselectedWidgetColor),
         ),
         labelText: widget.labelText.tr(),
       ),

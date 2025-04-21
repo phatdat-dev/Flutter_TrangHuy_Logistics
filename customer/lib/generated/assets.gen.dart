@@ -60,11 +60,25 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/Documents-rafiki.svg
+  String get documentsRafiki => 'assets/svg/Documents-rafiki.svg';
+
+  /// File path: assets/svg/In no time-pana.svg
+  String get inNoTimePana => 'assets/svg/In no time-pana.svg';
+
+  /// File path: assets/svg/Startup life-rafiki.svg
+  String get startupLifeRafiki => 'assets/svg/Startup life-rafiki.svg';
+
   /// File path: assets/svg/shield-success.svg
   String get shieldSuccess => 'assets/svg/shield-success.svg';
 
   /// List of all assets
-  List<String> get values => [shieldSuccess];
+  List<String> get values => [
+    documentsRafiki,
+    inNoTimePana,
+    startupLifeRafiki,
+    shieldSuccess,
+  ];
 }
 
 class $AssetsTranslationsGen {

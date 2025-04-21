@@ -5,7 +5,7 @@ class AppConstants {
 
   /// default padding of horizontal and vertical
   static const double paddingContent = 15.0;
-  static const double paddingTextField = 5;
-  static const BorderRadius borderRadius = BorderRadius.all(Radius.circular(15));
-  static const dividerThickness = 0.1;
+  static const double paddingTextField = 15.0;
+  static const BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
+  static const dividerThickness = 0.3;
 }

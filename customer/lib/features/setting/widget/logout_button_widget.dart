@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/locale_keys.g.dart';
+import '../../../shared/utils/my_helper_widget.dart';
 import '../../authentication/login/controller/login_controller.dart';
 
 class LogOutButtonWidget extends StatelessWidget {
@@ -18,7 +19,7 @@ class LogOutButtonWidget extends StatelessWidget {
         style: FilledButton.styleFrom(
           backgroundColor: backgroundColor ?? Theme.of(context).highlightColor.withValues(alpha: 0.2),
           foregroundColor: foregroundColor ?? Theme.of(context).colorScheme.onSurface,
-          side: Theme.of(context).inputDecorationTheme.enabledBorder?.borderSide ?? BorderSide.none,
+          side: MyHelperWidget.borderSide(context),
         ),
         child: Text(LocaleKeys.Logout.tr()),
       ),

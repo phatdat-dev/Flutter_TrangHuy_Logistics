@@ -65,24 +65,28 @@ class SettingView extends StatelessWidget {
                               icon: Icons.color_lens_outlined,
                               iconColor: Colors.green,
                               children: [
-                                // ListenableBuilder(
-                                //   listenable: themeController,
-                                //   builder: (context, child) => SwitchListTile(
-                                //     title: Row(
-                                //       children: [
-                                //         if (themeController.state.themeMode == ThemeMode.light)
-                                //           const Icon(Icons.wb_sunny_outlined)
-                                //         else
-                                //           const Icon(Icons.nightlight_round),
-                                //         const SizedBox(width: 10),
-                                //         Text(themeController.state.themeMode.name),
-                                //       ],
-                                //     ),
-                                //     value: themeController.state.themeMode == ThemeMode.light,
-                                //     onChanged: (value) =>
-                                //         themeController.state = themeController.state.copyWith(themeMode: value ? ThemeMode.light : ThemeMode.dark),
-                                //   ),
-                                // ),
+                                ListenableBuilder(
+                                  listenable: themeController,
+                                  builder:
+                                      (context, child) => SwitchListTile(
+                                        title: Row(
+                                          children: [
+                                            if (themeController.state.themeMode == ThemeMode.light)
+                                              const Icon(Icons.wb_sunny_outlined)
+                                            else
+                                              const Icon(Icons.nightlight_round),
+                                            const SizedBox(width: 10),
+                                            Text(themeController.state.themeMode.name),
+                                          ],
+                                        ),
+                                        value: themeController.state.themeMode == ThemeMode.light,
+                                        onChanged:
+                                            (value) =>
+                                                themeController.state = themeController.state.copyWith(
+                                                  themeMode: value ? ThemeMode.light : ThemeMode.dark,
+                                                ),
+                                      ),
+                                ),
                                 ListTile(
                                   onTap: () => const TestThemeRoute().push(context),
                                   title: Text(LocaleKeys.SettingView_ViewCurrentColorCode.tr()),

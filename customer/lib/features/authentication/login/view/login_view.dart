@@ -7,6 +7,9 @@ import 'package:package_core/package_core.dart';
 
 import '../../../../app/app_constants.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../../routes/app_router.dart';
+import '../../shared/widgets/social_button_widget.dart';
+import '../../shared/widgets/text_register_widget.dart';
 import '../../shared/widgets/textfield_password_widget.dart';
 import '../controller/login_controller.dart';
 
@@ -25,6 +28,8 @@ class _LoginViewState extends State<LoginView> {
     super.initState();
   }
 
+  void _onForgotPassword() => const ForgotPassword1SelectRoute().push(context);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,66 +45,80 @@ class _LoginViewState extends State<LoginView> {
                     SliverFillRemaining(
                       hasScrollBody: false,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AssetsCore.images.logo.logoRemovebgCrop512x512.image(width: 200, height: 200),
+                          Center(child: AssetsCore.images.logo.logoRemovebgCrop512x512.image(width: 200, height: 200)),
                           // Text(
                           //   AppConstants.appName,
                           //   style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                           //   textAlign: TextAlign.center,
                           // ),
                           SizedBox(height: context.height * 0.02),
-                          SizedBox(
+                          Text('Wellcome', style: context.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Fill in your email and password to continue",
+                            style: context.textTheme.titleMedium?.copyWith(color: Theme.of(context).hintColor),
+                          ),
+                          const SizedBox(height: 30),
+                          Container(
                             width: double.infinity,
+                            alignment: Alignment.center,
                             child: FormBuilder(
                               key: LoginController.formKey,
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  FormBuilderTextField(
+                                    enableSuggestions: true,
+                                    name: "username",
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(Icons.person_outline, color: context.theme.unselectedWidgetColor),
+                                      labelText: LocaleKeys.LoginView_Username.tr(),
+                                    ),
+                                    validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                                    initialValue: "Guest",
+                                  ),
+                                  SizedBox(height: context.height * 0.02),
+                                  FormBuilderTextFieldPasswordWidget(initialValue: "123", labelText: LocaleKeys.LoginView_Password.tr()),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      FormBuilderTextField(
-                                        enableSuggestions: true,
-                                        name: "username",
-                                        decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.person_outline, color: context.theme.unselectedWidgetColor),
-                                          labelText: LocaleKeys.LoginView_Username.tr(),
-                                        ),
-                                        validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-                                        initialValue: "Guest",
-                                      ),
-                                      SizedBox(height: context.height * 0.02),
-                                      FormBuilderTextFieldPasswordWidget(initialValue: "123", labelText: LocaleKeys.LoginView_Password.tr()),
-                                      SizedBox(height: context.height * 0.02),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: 50,
-                                        child: FilledButton.icon(
-                                          onPressed: () => controller.onLogin(),
-                                          icon: controller.isLoadding.builder(
-                                            (context, isLoaddingValue) =>
-                                                isLoaddingValue
-                                                    ? SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: CircularProgressIndicator(color: Theme.of(context).colorScheme.surface, strokeWidth: 3),
-                                                    )
-                                                    : const SizedBox.shrink(),
-                                          ),
-                                          label: Text(LocaleKeys.Login.tr()),
+                                      Expanded(
+                                        child: FormBuilderCheckbox(
+                                          name: "remember",
+                                          initialValue: true,
+                                          onChanged: (value) {},
+                                          title: const Text("Remember password"),
                                         ),
                                       ),
-                                      Center(
-                                        child: TextButton(
-                                          onPressed: () {},
-                                          style: TextButton.styleFrom(foregroundColor: context.theme.colorScheme.error),
-                                          child: Text(LocaleKeys.LoginView_ForgotPassword.tr()),
-                                        ),
-                                      ),
+                                      TextButton(onPressed: _onForgotPassword, child: Text(LocaleKeys.LoginView_ForgotPassword.tr())),
                                     ],
                                   ),
-                                ),
+                                  const SizedBox(height: 100),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: FilledButton.icon(
+                                      onPressed: () => controller.onLogin(),
+                                      icon: controller.isLoadding.builder(
+                                        (context, isLoaddingValue) =>
+                                            isLoaddingValue
+                                                ? SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: CircularProgressIndicator(color: Theme.of(context).colorScheme.surface, strokeWidth: 3),
+                                                )
+                                                : const SizedBox.shrink(),
+                                      ),
+                                      label: Text(LocaleKeys.Login.tr()),
+                                    ),
+                                  ),
+                                  const TextRegisterWidget(),
+                                  const SocialButtonWidget(),
+                                ],
                               ),
                             ),
                           ),

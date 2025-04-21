@@ -15,7 +15,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(title: Text("Trang Huy Logistics")),
+        // const SliverAppBar(title: Text("Trang Huy Logistics")),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: AppConstants.paddingContent),
           sliver: SliverList(

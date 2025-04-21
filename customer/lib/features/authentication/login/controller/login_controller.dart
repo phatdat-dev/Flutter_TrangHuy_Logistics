@@ -39,6 +39,7 @@ class LoginController extends BaseController {
   }
 
   Future<void> onLogin() async {
+    return redirectToHomeScreen();
     UserModel? user;
 
     if (formKey.currentState!.saveAndValidate()) {

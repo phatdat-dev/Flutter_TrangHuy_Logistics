@@ -8,32 +8,15 @@ class TextRegisterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: kToolbarHeight / 3),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Bạn không có tài khoản?"),
-              TextButton(
-                onPressed: () => const RegisterRoute().go(context),
-                child: Text(
-                  "Đăng ký ngay!",
-                  style: TextStyle(color: context.theme.colorScheme.error),
-                ),
-              ),
-            ],
-          ),
-          TextButton(
-            onPressed: () => const HomeRoute().go(context),
-            child: const Text(
-              "Tôi muốn đặt vé không cần tạo tài khoản >>",
-              style: TextStyle(color: Colors.green),
-            ),
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Already have an account?', style: TextStyle(color: Colors.grey)),
+        TextButton(
+          onPressed: () => const LoginRoute().go(context),
+          child: const Text('Sign in', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+        ),
+      ],
     );
   }
 }
@@ -51,10 +34,7 @@ class TextLoginWidget extends StatelessWidget {
           const Text("Bạn đã có tài khoản?"),
           TextButton(
             onPressed: () => const LoginRoute().go(context),
-            child: Text(
-              "Đăng nhập ngay!",
-              style: TextStyle(color: context.theme.colorScheme.error),
-            ),
+            child: Text("Đăng nhập ngay!", style: TextStyle(color: context.theme.colorScheme.error)),
           ),
         ],
       ),

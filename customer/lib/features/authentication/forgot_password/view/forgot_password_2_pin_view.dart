@@ -36,7 +36,7 @@ class ForgotPassword2PinView extends StatelessWidget {
                         child: Builder(
                           builder: (context) {
                             final borderWidth = MyHelperWidget.borderSide(context).width; // 0.5
-                            final fillColor = context.theme.inputDecorationTheme.fillColor;
+                            final fillColor = Theme.of(context).colorScheme.surface;
                             return PinCodeTextField(
                               appContext: context,
                               length: 4,

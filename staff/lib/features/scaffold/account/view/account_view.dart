@@ -26,8 +26,8 @@ class AccountView extends StatelessWidget {
         headerSliverBuilder:
             (context, innerBoxIsScrolled) => [
               SliverAppBar(
-                title: Text("Tài khoản".tr()),
                 centerTitle: true,
+                title: Text("Tài khoản".tr()),
                 actions: [
                   IconButton(
                     tooltip: "Cài đặt ứng dụng".tr(),
