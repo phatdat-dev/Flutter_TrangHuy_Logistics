@@ -5,7 +5,7 @@ import 'package:yaml/yaml.dart';
 
 //? dart bin/my_dart_tool.dart env ../_package_core
 
-Future<void> generateEnv(Directory projectDir) async {
+Future<void> runGenerateEnv(Directory projectDir) async {
   final envFile = File(p.join(projectDir.path, '.env'));
   final pubspecFile = File(p.join(projectDir.path, 'pubspec.yaml'));
 

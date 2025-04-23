@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 
 //? dart bin/my_dart_tool.dart export ../_package_core
 
-void generateExports(String pathToPackage) {
+void runGenerateExports(String pathToPackage) {
   final absolutePath = Directory(pathToPackage).absolute.path;
   final libFolder = p.join(absolutePath, 'lib');
   final packageName = p.basename(absolutePath);
