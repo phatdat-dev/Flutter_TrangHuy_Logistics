@@ -1,19 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:package_core/package_core.dart';
 
 import '../../packages/curved_navigation_bar/curved_navigation_bar.dart';
+import '../../router/app_router.dart';
 import '../notification/controller/notification_controller.dart';
 import 'home/controller/home_controller.dart';
 
+@RoutePage()
 class ScaffoldCurvedBottomnavView extends StatefulWidget {
-  const ScaffoldCurvedBottomnavView(this.navigationShell, this.children, {super.key});
-
-  final StatefulNavigationShell navigationShell;
-  final List<Widget> children;
+  const ScaffoldCurvedBottomnavView({super.key});
 
   @override
   State<ScaffoldCurvedBottomnavView> createState() => _ScaffoldCurvedBottomnavViewState();
@@ -72,41 +71,45 @@ class _ScaffoldCurvedBottomnavViewState extends State<ScaffoldCurvedBottomnavVie
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      //huy keyboard khi bam ngoai man hinh
-      onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
-      child: Scaffold(
-        // resizeToAvoidBottomInset: true,
-        // extendBody: true,
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: Stack(
-          children:
-              widget.children.mapIndexed((int index, Widget navigator) {
-                return AnimatedScale(
-                  scale: index == widget.navigationShell.currentIndex ? 1 : 1.5,
-                  duration: const Duration(milliseconds: 150),
-                  child: AnimatedOpacity(
-                    opacity: index == widget.navigationShell.currentIndex ? 1 : 0,
-                    duration: const Duration(milliseconds: 150),
-                    child: IgnorePointer(
-                      ignoring: index != widget.navigationShell.currentIndex,
-                      child: TickerMode(enabled: index == widget.navigationShell.currentIndex, child: navigator),
-                    ),
-                  ),
-                );
-              }).toList(),
-        ),
-        //Footer
-        bottomNavigationBar: BottomNavigationWidget(widget.navigationShell),
+    return CheckAppView(
+      child: AutoTabsRouter.builder(
+        routes: [const HomeRoute(), const WalletRoute(), const TrackRoute(), const AccountRoute()],
+        builder:
+            (context, children, tabsRouter) => GestureDetector(
+              //huy keyboard khi bam ngoai man hinh
+              onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
+              child: Scaffold(
+                // resizeToAvoidBottomInset: true,
+                // extendBody: true,
+                extendBodyBehindAppBar: true,
+                extendBody: true,
+                body: Stack(
+                  children:
+                      children.mapIndexed((int index, Widget navigator) {
+                        final isCurrent = index == tabsRouter.activeIndex;
+                        return AnimatedScale(
+                          scale: isCurrent ? 1 : 1.5,
+                          duration: const Duration(milliseconds: 150),
+                          child: AnimatedOpacity(
+                            opacity: isCurrent ? 1 : 0,
+                            duration: const Duration(milliseconds: 150),
+                            child: IgnorePointer(ignoring: !isCurrent, child: TickerMode(enabled: isCurrent, child: navigator)),
+                          ),
+                        );
+                      }).toList(),
+                ),
+                //Footer
+                bottomNavigationBar: BottomNavigationWidget(tabsRouter),
+              ),
+            ),
       ),
     );
   }
 }
 
 class BottomNavigationWidget extends StatelessWidget {
-  const BottomNavigationWidget(this.navigationShell, {super.key});
-  final StatefulNavigationShell navigationShell;
+  const BottomNavigationWidget(this.tabsRouter, {super.key});
+  final TabsRouter tabsRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -117,17 +120,9 @@ class BottomNavigationWidget extends StatelessWidget {
       // buttonLabelColor: Colors.white,
       animationDuration: const Duration(milliseconds: 300),
       height: Globals.isIos ? 80 : 65,
-      onTap:
-          (index) => navigationShell.goBranch(
-            index,
-            // A common pattern when using bottom navigation bars is to support
-            // navigating to the initial location when tapping the item that is
-            // already active. This example demonstrates how to support this behavior,
-            // using the initialLocation parameter of goBranch.
-            initialLocation: index == navigationShell.currentIndex,
-          ),
+      onTap: (index) => tabsRouter.setActiveIndex(index),
       items:
-          {"Home": MingCute.home_5_line, "Wallet": MingCute.wallet_4_line, "Track": MingCute.car_line, "Profile": MingCute.user_3_line}.entries
+          {"Home": MingCute.home_5_line, "Wallet": MingCute.wallet_4_line, "Track": MingCute.car_line, "Account": MingCute.user_3_line}.entries
               .map(
                 (e) => CurvedNavigationBarItem(
                   icon: Icon(e.value, color: Colors.white, size: 30),

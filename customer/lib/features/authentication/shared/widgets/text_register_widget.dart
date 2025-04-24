@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 
@@ -13,7 +14,7 @@ class TextRegisterWidget extends StatelessWidget {
       children: [
         const Text('Already have an account?', style: TextStyle(color: Colors.grey)),
         TextButton(
-          onPressed: () => const LoginRoute().go(context),
+          onPressed: () => context.replaceRoute(const LoginRoute()),
           child: const Text('Sign in', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
         ),
       ],
@@ -33,7 +34,7 @@ class TextLoginWidget extends StatelessWidget {
         children: [
           const Text("Bạn đã có tài khoản?"),
           TextButton(
-            onPressed: () => const LoginRoute().go(context),
+            onPressed: () => context.replaceRoute(const LoginRoute()),
             child: Text("Đăng nhập ngay!", style: TextStyle(color: context.theme.colorScheme.error)),
           ),
         ],

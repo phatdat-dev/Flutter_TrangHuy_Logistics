@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, use_build_context_synchronously
 
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -11,6 +12,7 @@ import '../../../../../app/app_theme.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../widget/setting_menu_widget.dart';
 
+@RoutePage()
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
 

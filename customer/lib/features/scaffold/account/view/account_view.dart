@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -15,6 +16,7 @@ import '../../../setting/widget/circle_avatar_outline_edit.dart';
 import '../../../setting/widget/setting_menu_widget.dart';
 import '../../../user/controller/user_controller.dart';
 
+@RoutePage()
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
 

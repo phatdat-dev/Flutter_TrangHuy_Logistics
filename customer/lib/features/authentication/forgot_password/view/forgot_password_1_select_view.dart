@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -8,6 +9,7 @@ import '../../../../routes/app_router.dart';
 import '../../../../shared/utils/my_helper_widget.dart';
 import '../controller/forgot_password_controller.dart';
 
+@RoutePage()
 class ForgotPassword1SelectView extends StatelessWidget {
   const ForgotPassword1SelectView({super.key});
 

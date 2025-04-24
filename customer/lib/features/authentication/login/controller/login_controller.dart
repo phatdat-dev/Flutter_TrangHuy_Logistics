@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -69,7 +70,7 @@ class LoginController extends BaseController {
 
   void redirectToHomeScreen() {
     final context = formKey.currentState?.context ?? AppGlobals.context;
-    if (context.mounted) const HomeRoute().go(context);
+    if (context.mounted) context.replaceRoute(const HomeRoute());
   }
 
   static Future<void> onLogout() async {
@@ -80,7 +81,7 @@ class LoginController extends BaseController {
     await _localDataSource.removeUserFromStorage();
     // trả về màn hình login
     final context = AppGlobals.context;
-    if (context.mounted) const LoginRoute().go(context);
+    if (context.mounted) context.replaceRoute(const LoginRoute());
     // nếu có lưu mật khẩu thì set lại thông tin đăng nhập tại form
     if (isSavePassword.value && cacheUser != null) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

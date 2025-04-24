@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 
-import '../../../../routes/app_router.dart';
+import '../../../../router/app_router.dart';
 
 class TextRegisterWidget extends StatelessWidget {
   const TextRegisterWidget({super.key});
@@ -17,20 +18,14 @@ class TextRegisterWidget extends StatelessWidget {
             children: [
               const Text("Bạn không có tài khoản?"),
               TextButton(
-                onPressed: () => const RegisterRoute().go(context),
-                child: Text(
-                  "Đăng ký ngay!",
-                  style: TextStyle(color: context.theme.colorScheme.error),
-                ),
+                onPressed: () => context.replaceRoute(const RegisterRoute()),
+                child: Text("Đăng ký ngay!", style: TextStyle(color: context.theme.colorScheme.error)),
               ),
             ],
           ),
           TextButton(
-            onPressed: () => const HomeRoute().go(context),
-            child: const Text(
-              "Tôi muốn đặt vé không cần tạo tài khoản >>",
-              style: TextStyle(color: Colors.green),
-            ),
+            onPressed: () => context.replaceRoute(const HomeRoute()),
+            child: const Text("Tôi muốn đặt vé không cần tạo tài khoản >>", style: TextStyle(color: Colors.green)),
           ),
         ],
       ),
@@ -50,11 +45,8 @@ class TextLoginWidget extends StatelessWidget {
         children: [
           const Text("Bạn đã có tài khoản?"),
           TextButton(
-            onPressed: () => const LoginRoute().go(context),
-            child: Text(
-              "Đăng nhập ngay!",
-              style: TextStyle(color: context.theme.colorScheme.error),
-            ),
+            onPressed: () => context.replaceRoute(const LoginRoute()),
+            child: Text("Đăng nhập ngay!", style: TextStyle(color: context.theme.colorScheme.error)),
           ),
         ],
       ),

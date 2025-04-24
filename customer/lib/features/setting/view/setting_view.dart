@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, use_build_context_synchronously
 
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -9,8 +10,10 @@ import 'package:package_core/package_core.dart';
 import '../../../../../app/app_constants.dart';
 import '../../../../../app/app_theme.dart';
 import '../../../../../generated/locale_keys.g.dart';
+import '../../../routes/app_router.dart';
 import '../widget/setting_menu_widget.dart';
 
+@RoutePage()
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
 
@@ -134,15 +137,13 @@ class SettingView extends StatelessWidget {
                             const AppExceptionRoute().push(context);
                           },
                         ),
-                        // SettingMenuWidget(
-                        //   title: "Test Link bank",
-                        //   subTitle: devMode,
-                        //   icon: Icons.error_outline,
-                        //   iconColor: Colors.red,
-                        //   onTap: () {
-                        //     launchUrlString("https://dl.vietqr.io/pay?app=acb&ba=CAS01@ocb");
-                        //   },
-                        // ),
+                        SettingMenuWidget(
+                          title: "All View/Screen/Page",
+                          subTitle: devMode,
+                          icon: Icons.error_outline,
+                          iconColor: Colors.red,
+                          onTap: () => context.pushRoute(const AllRoute()),
+                        ),
                       ].map((e) => Padding(padding: const EdgeInsets.only(bottom: (AppConstants.paddingTextField / 2)), child: e)).toList(),
                     ),
                   ),

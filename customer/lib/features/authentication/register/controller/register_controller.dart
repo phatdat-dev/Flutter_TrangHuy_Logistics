@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -32,7 +33,7 @@ class RegisterController extends BaseController {
         },
         (data) async {
           MyHelperWidget.showToastSuccess(data.message ?? "");
-          const LoginRoute().go(AppGlobals.context);
+          AppGlobals.context.replaceRoute(const LoginRoute());
         },
       );
       isLoadding.value = false;

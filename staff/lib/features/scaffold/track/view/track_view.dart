@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:package_core/package_core.dart';
 
 import '../../../../../app/app_constants.dart';
 
+@RoutePage()
 class TrackView extends StatefulWidget {
   const TrackView({super.key});
 

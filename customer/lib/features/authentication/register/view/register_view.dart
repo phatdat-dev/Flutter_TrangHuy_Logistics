@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -6,6 +7,7 @@ import '../../../../routes/app_router.dart';
 import '../../shared/widgets/social_button_widget.dart';
 import '../../shared/widgets/text_register_widget.dart';
 
+@RoutePage()
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
@@ -18,7 +20,7 @@ class _RegisterViewState extends State<RegisterView> {
   bool _agreedToTerms = false;
 
   void _onSignUpPressed() {
-    const LoginRoute().go(context);
+    context.replaceRoute(const LoginRoute());
   }
 
   @override

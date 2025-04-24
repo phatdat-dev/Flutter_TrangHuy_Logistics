@@ -1,10 +1,6 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart' as datz;
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:package_core/package_core.dart';
 
 import '../features/authentication/forgot_password/view/forgot_password_1_select_view.dart';
 import '../features/authentication/forgot_password/view/forgot_password_2_pin_view.dart';
@@ -15,39 +11,70 @@ import '../features/notification/view/notification_view.dart';
 import '../features/onboarding/view/onboarding_view.dart';
 import '../features/scaffold/account/view/account_view.dart';
 import '../features/scaffold/home/view/home_view.dart';
+import '../features/scaffold/home/view/package_delivery_form_view.dart.dart';
+import '../features/scaffold/home/view/package_summary_view.dart';
+import '../features/scaffold/orders/view/orders_view.dart';
 import '../features/scaffold/scaffold_curved_bottomnav_view.dart';
 import '../features/scaffold/track/view/track_view.dart';
-import '../features/scaffold/wallet/view/wallet_view.dart';
 import '../features/setting/view/setting_view.dart';
-import '../features/user/controller/user_controller.dart';
+import '../features/trash/all_view.dart';
+import '../features/trash/book_rider_view.dart';
+import '../features/trash/delivery_successful_view.dart';
+import '../features/trash/payment_view.dart';
+import '../features/trash/transaction_successful_view.dart';
+import '../features/trash/wallet_view.dart';
 import '../features/user/view/user_view.dart';
-import '../shared/widgets/test_widget/test_view.dart';
 
-part 'app_router.g.dart';
-part 'authentication/authentication_route.dart';
-part 'authentication/forgot_password/forgot_password_branch_route.dart';
-part 'authentication/forgot_password/forgot_password_route.dart';
-part 'onboarding/onboarding_route.dart';
-part 'scaffold/scaffold_branch_route.dart';
-part 'scaffold/scaffold_route.dart';
-part 'test_route/test_route.dart';
-part 'user/user_route.dart';
+part 'app_router.gr.dart';
 
-String get _initialRoute {
-  if (GetIt.instance<UserController>().onBoardingSuccess) {
-    return const HomeRoute().location;
-  } else {
-    return const OnboardingRoute().location;
-  }
+// String get _initialRoute {
+//   if (GetIt.instance<UserController>().onBoardingSuccess) {
+//     return const HomeRoute().location;
+//   } else {
+//     return const OnboardingRoute().location;
+//   }
+// }
+
+final appRouter = AppRouter();
+
+@AutoRouterConfig(replaceInRouteName: 'Page|Screen|View,Route')
+class AppRouter extends RootStackRouter {
+  @override
+  List<AutoRoute> get routes => [
+    ...datz.DAppRouter().routes,
+
+    AutoRoute(page: ForgotPassword1SelectRoute.page),
+    AutoRoute(page: ForgotPassword2PinRoute.page),
+    AutoRoute(page: ForgotPassword3NewPassRoute.page),
+    //
+    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: RegisterRoute.page),
+
+    AutoRoute(page: NotificationRoute.page),
+    AutoRoute(initial: true, page: OnboardingRoute.page),
+    AutoRoute(
+      page: ScaffoldCurvedBottomnavRoute.page,
+      children: [
+        AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: OrdersRoute.page),
+        AutoRoute(page: TrackRoute.page),
+        AutoRoute(page: AccountRoute.page),
+      ],
+    ),
+    AutoRoute(page: SettingRoute.page),
+    AutoRoute(
+      page: AllRoute.page,
+      children: [
+        AutoRoute(page: BookRiderRoute.page),
+        AutoRoute(page: PaymentRoute.page),
+        AutoRoute(page: WalletRoute.page),
+        AutoRoute(page: TransactionSuccessfulRoute.page),
+        AutoRoute(page: DeliverySuccessfulRoute.page),
+      ],
+    ),
+    AutoRoute(page: UserRoute.page),
+  ];
 }
-
-final goRouterProvider = GoRouter(
-  initialLocation: _initialRoute,
-  navigatorKey: datz.AppGlobals.rootNavigatorKey,
-  debugLogDiagnostics: true,
-  routes: [...$appRoutes, ...datz.$appRoutes],
-  // observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-);
 
 /*
 int _random = -1;
@@ -65,21 +92,3 @@ CustomTransitionPage _buildPage(BuildContext context, GoRouterState state, Widge
   );
 }
 */
-//
-
-@TypedGoRoute<NotificationRoute>(path: '/notification')
-class NotificationRoute extends GoRouteData {
-  const NotificationRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const NotificationView();
-}
-//
-
-@TypedGoRoute<SettingRoute>(path: '/setting')
-class SettingRoute extends GoRouteData {
-  const SettingRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const SettingView();
-}

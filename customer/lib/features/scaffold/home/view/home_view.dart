@@ -1,12 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:chatview/chatview.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_constants.dart';
 import '../../../../routes/app_router.dart';
-import 'book_rider_view.dart';
 import 'package_delivery_form_view.dart.dart';
-import 'payment_view.dart';
 
+@RoutePage()
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -200,14 +200,12 @@ class _HomeViewState extends State<HomeView> {
                   // Payment Card
                   Expanded(
                     child: _buildActionCard(
-                      icon: Icons.account_balance_wallet_outlined,
-                      title: 'Payment',
-                      subtitle: 'History',
+                      icon: Icons.description_outlined,
+                      title: 'Document',
+                      subtitle: 'Order documents',
                       color: Colors.blue,
                       backgroundColor: Colors.grey[200]!,
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => const PaymentView()));
-                      },
+                      onTap: () {},
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -216,14 +214,12 @@ class _HomeViewState extends State<HomeView> {
                   Expanded(
                     child: _buildActionCard(
                       icon: Icons.directions_car_outlined,
-                      title: 'Book a rider',
-                      subtitle: 'Tracking your Order',
+                      title: 'Tracking',
+                      subtitle: 'Tracking your route & location',
                       color: Colors.white,
                       backgroundColor: Colors.blue,
                       isHighlighted: true,
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context) => const BookRiderView()));
-                      },
+                      onTap: () {},
                     ),
                   ),
                 ],

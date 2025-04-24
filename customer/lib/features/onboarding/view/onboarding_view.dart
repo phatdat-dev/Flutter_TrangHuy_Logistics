@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 
@@ -5,6 +6,7 @@ import '../../../generated/assets.gen.dart';
 import '../../../routes/app_router.dart';
 import '../../authentication/shared/widgets/text_register_widget.dart';
 
+@RoutePage()
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
 
@@ -51,7 +53,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     _pageController.jumpToPage(_numPages - 1);
   }
 
-  void _onSignUpPressed() => const RegisterRoute().go(context);
+  void _onSignUpPressed() => context.replaceRoute(const RegisterRoute());
 
   @override
   Widget build(BuildContext context) {

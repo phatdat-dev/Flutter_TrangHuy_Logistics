@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_core/package_core.dart';
 
-import '../../../../routes/app_router.dart';
+import '../../../../router/app_router.dart';
 import '../../../user/controller/user_controller.dart';
 import '../../shared/datasource/local/authentication_local_datasource.dart';
 import '../../shared/datasource/remote/authentication_remote_datasource.dart';
@@ -68,7 +69,7 @@ class LoginController extends BaseController {
 
   void redirectToHomeScreen() {
     final context = formKey.currentState?.context ?? AppGlobals.context;
-    if (context.mounted) const HomeRoute().go(context);
+    if (context.mounted) context.replaceRoute(const HomeRoute());
   }
 
   static Future<void> onLogout() async {
@@ -79,7 +80,7 @@ class LoginController extends BaseController {
     await _localDataSource.removeUserFromStorage();
     // trả về màn hình login
     final context = AppGlobals.context;
-    if (context.mounted) const LoginRoute().go(context);
+    if (context.mounted) context.replaceRoute(const LoginRoute());
     // nếu có lưu mật khẩu thì set lại thông tin đăng nhập tại form
     if (isSavePassword.value && cacheUser != null) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

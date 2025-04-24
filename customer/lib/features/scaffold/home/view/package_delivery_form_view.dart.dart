@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package_summary_view.dart';
 
+@RoutePage()
 class PackageDeliveryFormView extends StatefulWidget {
   const PackageDeliveryFormView({super.key});
 

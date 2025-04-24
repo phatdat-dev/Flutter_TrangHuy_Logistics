@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // PackageTrackingScreen
+@RoutePage()
 class TrackView extends StatelessWidget {
   const TrackView({super.key});
 

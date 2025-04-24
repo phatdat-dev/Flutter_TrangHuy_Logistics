@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
@@ -9,10 +10,10 @@ import '../../../../app/app_constants.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../../../routes/app_router.dart';
 import '../../shared/widgets/social_button_widget.dart';
-import '../../shared/widgets/text_register_widget.dart';
 import '../../shared/widgets/textfield_password_widget.dart';
 import '../controller/login_controller.dart';
 
+@RoutePage()
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -116,7 +117,16 @@ class _LoginViewState extends State<LoginView> {
                                       label: Text(LocaleKeys.Login.tr()),
                                     ),
                                   ),
-                                  const TextRegisterWidget(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text("Don't have an account?", style: TextStyle(color: Colors.grey)),
+                                      TextButton(
+                                        onPressed: () => context.replaceRoute(const RegisterRoute()),
+                                        child: const Text('Sign up', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                                      ),
+                                    ],
+                                  ),
                                   const SocialButtonWidget(),
                                 ],
                               ),

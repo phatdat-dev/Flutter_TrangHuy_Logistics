@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:package_core/package_core.dart';
 
 import 'app/app_constants.dart';
@@ -33,7 +32,7 @@ class MyConfigs extends BaseConfigs {
   String get appTitle => AppConstants.appName;
 
   @override
-  GoRouter router(BuildContext context) => goRouterProvider;
+  RouterConfig<Object>? routerConfig(BuildContext context) => appRouter.config();
 
   @override
   ThemeState get themeState => ThemeState(lightTheme: AppTheme.lightTheme, darkTheme: AppTheme.darkTheme);

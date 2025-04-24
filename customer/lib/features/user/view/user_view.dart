@@ -1,3 +1,4 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_core_datz/flutter_core_datz.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
@@ -8,6 +9,7 @@ import "../../../../app/app_constants.dart";
 import "../../authentication/login/controller/login_controller.dart";
 import "../controller/user_controller.dart";
 
+@RoutePage()
 class UserView extends StatefulWidget {
   const UserView({super.key});
 

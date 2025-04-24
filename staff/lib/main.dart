@@ -5,14 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_core_datz/flutter_core_datz.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:package_core/package_core.dart';
 
 import 'app/app_constants.dart';
 import 'app/app_theme.dart';
 import 'features/setting/controller/setting_controller.dart';
 import 'features/user/controller/user_controller.dart';
-import 'routes/app_router.dart';
+import 'router/app_router.dart';
 import 'shared/datasource/local/my_storage_service.dart';
 
 void main() => runMain(
@@ -33,7 +32,7 @@ class MyConfigs extends BaseConfigs {
   String get appTitle => AppConstants.appName;
 
   @override
-  GoRouter router(BuildContext context) => goRouterProvider;
+  RouterConfig<Object>? routerConfig(BuildContext context) => AppRouter().config();
 
   @override
   ThemeState get themeState => ThemeState(lightTheme: AppTheme.lightTheme, darkTheme: AppTheme.darkTheme);
