@@ -24,7 +24,7 @@ class _TrackViewState extends State<TrackView> {
             delegate: SliverChildListDelegate([
               const SizedBox(height: 10),
 
-              SizedBox(height: kBottomNavigationBarHeight * (Globals.isIos ? 2.3 : 1.5)),
+              SizedBox(height: kBottomNavigationBarHeight * (AppGlobals.isIos ? 2.3 : 1.5)),
             ]),
           ),
         ),

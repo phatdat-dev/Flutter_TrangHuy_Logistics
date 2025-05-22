@@ -13,9 +13,15 @@ class PackageSummaryView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Send a package', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.normal)),
+        title: const Text(
+          'Send a package',
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.normal),
+        ),
 
-        bottom: PreferredSize(preferredSize: const Size.fromHeight(1.0), child: Container(color: Colors.grey[300], height: 1.0)),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: Colors.grey[300], height: 1.0),
+        ),
       ),
       body: Column(
         children: [
@@ -40,7 +46,10 @@ class PackageSummaryView extends StatelessWidget {
                   _buildInfoItemWithValue('Tracking Number', 'THL-7458-452'),
 
                   // Divider
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 16.0), child: Container(height: 1, color: Colors.grey[300])),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Container(height: 1, color: Colors.grey[300]),
+                  ),
 
                   // Charges Section
                   _buildSectionHeader('Charges', Colors.blue),
@@ -58,7 +67,7 @@ class PackageSummaryView extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -3))],
+              boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -3))],
             ),
             child: Row(
               children: [
@@ -92,7 +101,10 @@ class PackageSummaryView extends StatelessWidget {
   Widget _buildSectionHeader(String title, Color color) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-      child: Text(title, style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 16)),
+      child: Text(
+        title,
+        style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
     );
   }
 
@@ -129,8 +141,14 @@ class PackageSummaryView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey[700], fontSize: 14, fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
-          Text(amount, style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
+          Text(
+            label,
+            style: TextStyle(color: Colors.grey[700], fontSize: 14, fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+          ),
+          Text(
+            amount,
+            style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+          ),
         ],
       ),
     );

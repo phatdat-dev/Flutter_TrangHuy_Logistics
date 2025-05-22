@@ -33,7 +33,7 @@ class RegisterController extends BaseController {
         },
         (data) async {
           MyHelperWidget.showToastSuccess(data.message ?? "");
-          AppGlobals.context.replaceRoute(const LoginRoute());
+          Globals.context.replaceRoute(const LoginRoute());
         },
       );
       isLoadding.value = false;

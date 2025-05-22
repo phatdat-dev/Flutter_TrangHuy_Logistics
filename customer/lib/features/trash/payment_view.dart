@@ -127,13 +127,19 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Payment', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500)),
+        title: const Text(
+          'Payment',
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
+        ),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.blue,
           unselectedLabelColor: Colors.grey,
           indicatorColor: Colors.blue,
-          tabs: const [Tab(text: 'Overview'), Tab(text: 'History')],
+          tabs: const [
+            Tab(text: 'Overview'),
+            Tab(text: 'History'),
+          ],
         ),
       ),
       body: TabBarView(controller: _tabController, children: [_buildOverviewTab(), _buildHistoryTab()]),
@@ -152,14 +158,17 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [Colors.blue[700]!, Colors.blue[500]!], begin: Alignment.topLeft, end: Alignment.bottomRight),
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: Colors.blue.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 4))],
+              boxShadow: [BoxShadow(color: Colors.blue.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 4))],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Total Balance', style: TextStyle(color: Colors.white70, fontSize: 14)),
                 const SizedBox(height: 8),
-                const Text('1,250,000₫', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+                const Text(
+                  '1,250,000₫',
+                  style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,7 +186,10 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
           const SizedBox(height: 24),
 
           // Payment Methods
-          const Text('Payment Methods', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
+          const Text(
+            'Payment Methods',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+          ),
           const SizedBox(height: 16),
 
           // Credit Card
@@ -189,15 +201,22 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
           // Add Payment Method Button
           Container(
             margin: const EdgeInsets.only(top: 8),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.blue, width: 1)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.blue, width: 1),
+            ),
             child: ListTile(
               leading: Container(
                 width: 40,
                 height: 40,
-                decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+                decoration: BoxDecoration(color: Colors.blue.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
                 child: const Icon(Icons.add, color: Colors.blue),
               ),
-              title: const Text('Add Payment Method', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500)),
+              title: const Text(
+                'Add Payment Method',
+                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
+              ),
               onTap: () {},
             ),
           ),
@@ -208,7 +227,10 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Recent Transactions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
+              const Text(
+                'Recent Transactions',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+              ),
               TextButton(
                 onPressed: () {
                   _tabController.animateTo(1);
@@ -265,44 +287,43 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
 
         // Transaction List
         Expanded(
-          child:
-              _filteredTransactions.isEmpty
-                  ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.receipt_long, size: 64, color: Colors.grey[400]),
-                        const SizedBox(height: 16),
-                        Text('No transactions found', style: TextStyle(fontSize: 16, color: Colors.grey[600])),
-                      ],
-                    ),
-                  )
-                  : ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: _filteredTransactions.length,
-                    itemBuilder: (context, index) {
-                      final transaction = _filteredTransactions[index];
-
-                      // Add date header if this is the first transaction or if the date is different from the previous one
-                      final showDateHeader = index == 0 || !_isSameDay(transaction.date, _filteredTransactions[index - 1].date);
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (showDateHeader) ...[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 16),
-                              child: Text(
-                                _formatDateHeader(transaction.date),
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey[700]),
-                              ),
-                            ),
-                          ],
-                          _buildTransactionItem(transaction),
-                        ],
-                      );
-                    },
+          child: _filteredTransactions.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.receipt_long, size: 64, color: Colors.grey[400]),
+                      const SizedBox(height: 16),
+                      Text('No transactions found', style: TextStyle(fontSize: 16, color: Colors.grey[600])),
+                    ],
                   ),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: _filteredTransactions.length,
+                  itemBuilder: (context, index) {
+                    final transaction = _filteredTransactions[index];
+
+                    // Add date header if this is the first transaction or if the date is different from the previous one
+                    final showDateHeader = index == 0 || !_isSameDay(transaction.date, _filteredTransactions[index - 1].date);
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (showDateHeader) ...[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8, bottom: 16),
+                            child: Text(
+                              _formatDateHeader(transaction.date),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                            ),
+                          ),
+                        ],
+                        _buildTransactionItem(transaction),
+                      ],
+                    );
+                  },
+                ),
         ),
       ],
     );
@@ -316,7 +337,7 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
           Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
             child: Icon(icon, color: Colors.white),
           ),
           const SizedBox(height: 8),
@@ -339,14 +360,13 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
         ),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
         subtitle: Text(subtitle, style: TextStyle(color: Colors.grey[600], fontSize: 12)),
-        trailing:
-            trailing.isNotEmpty
-                ? Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(color: Colors.green[50], borderRadius: BorderRadius.circular(4)),
-                  child: Text(trailing, style: TextStyle(color: Colors.green[700], fontSize: 12)),
-                )
-                : null,
+        trailing: trailing.isNotEmpty
+            ? Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(color: Colors.green[50], borderRadius: BorderRadius.circular(4)),
+                child: Text(trailing, style: TextStyle(color: Colors.green[700], fontSize: 12)),
+              )
+            : null,
         onTap: () {},
       ),
     );
@@ -381,7 +401,7 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
               const SizedBox(height: 4),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(color: _getStatusColor(transaction.status).withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                decoration: BoxDecoration(color: _getStatusColor(transaction.status).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                 child: Text(
                   _getStatusText(transaction.status),
                   style: TextStyle(color: _getStatusColor(transaction.status), fontSize: 10, fontWeight: FontWeight.w500),
@@ -441,7 +461,10 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
                     const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(color: _getStatusColor(transaction.status).withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                      decoration: BoxDecoration(
+                        color: _getStatusColor(transaction.status).withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                       child: Text(
                         _getStatusText(transaction.status),
                         style: TextStyle(color: _getStatusColor(transaction.status), fontWeight: FontWeight.w500),
@@ -495,8 +518,13 @@ class _PaymentViewState extends State<PaymentView> with SingleTickerProviderStat
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(width: 120, child: Text(label, style: TextStyle(color: Colors.grey[600], fontSize: 14))),
-          Expanded(child: Text(value, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14))),
+          SizedBox(
+            width: 120,
+            child: Text(label, style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+          ),
+          Expanded(
+            child: Text(value, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
+          ),
         ],
       ),
     );

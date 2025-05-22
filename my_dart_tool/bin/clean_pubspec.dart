@@ -4,8 +4,8 @@ import 'dart:io';
 
 // Cấu hình chỉnh sửa environment
 const bool shouldUpdateEnvironment = true;
-const String newSdkVersion = '3.7.2';
-const String newFlutterVersion = '3.29.3';
+const String newFlutterVersion = '3.32.0';
+const String newSdkVersion = '3.8.0';
 
 /// Clean Flutter projects and optionally update pubspec.yaml environment versions
 Future<void> runCleanPubspec() async {

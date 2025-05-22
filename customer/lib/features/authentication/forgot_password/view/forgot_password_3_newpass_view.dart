@@ -16,14 +16,17 @@ class ForgotPassword3NewPassView extends StatelessWidget {
 
   void onPressed() {
     if (formKey.currentState!.saveAndValidate()) {
-      final context = AppGlobals.context;
+      final context = Globals.context;
       HelperWidget.showCustomAlertDialog(
         context: context,
         defaultSize: false,
         child: Column(
           children: [
             Padding(padding: const EdgeInsets.only(right: 15), child: HelperWidget.imageWidget(Assets.svg.shieldSuccess, width: 150)),
-            Text("Chúc mừng".tr(), style: context.textTheme.headlineMedium?.copyWith(color: Colors.green.shade300, fontWeight: FontWeight.w500)),
+            Text(
+              "Chúc mừng".tr(),
+              style: context.textTheme.headlineMedium?.copyWith(color: Colors.green.shade300, fontWeight: FontWeight.w500),
+            ),
             const SizedBox(height: 15),
             Text("Bạn đã tạo mật khẩu thành công. Sẽ tự động chuyển về màn hình chính trong 3 giây.".tr(), textAlign: TextAlign.center),
           ],

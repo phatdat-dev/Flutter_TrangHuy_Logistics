@@ -8,7 +8,7 @@ import '../../app/app_constants.dart';
 
 final class MyHelperWidget {
   static void showToastSuccess(String message, {ToastificationCallbacks callbacks = const ToastificationCallbacks()}) {
-    final context = AppGlobals.context;
+    final context = Globals.context;
     toastification.show(
       context: context,
       type: ToastificationType.success,
@@ -24,7 +24,7 @@ final class MyHelperWidget {
   }
 
   static void showToastWarning(String message) {
-    final context = AppGlobals.context;
+    final context = Globals.context;
     toastification.show(
       context: context,
       type: ToastificationType.warning,
@@ -51,10 +51,9 @@ final class MyHelperWidget {
     }
   }
 
-  static EdgeInsetsGeometry bottomPaddingIOS({double horizontal = AppConstants.paddingContent}) =>
-      Platform.isIOS
-          ? EdgeInsets.only(bottom: kToolbarHeight / 3, left: horizontal, right: horizontal, top: 5)
-          : EdgeInsets.symmetric(horizontal: horizontal);
+  static EdgeInsetsGeometry bottomPaddingIOS({double horizontal = AppConstants.paddingContent}) => Platform.isIOS
+      ? EdgeInsets.only(bottom: kToolbarHeight / 3, left: horizontal, right: horizontal, top: 5)
+      : EdgeInsets.symmetric(horizontal: horizontal);
 
   static BorderSide borderSide(BuildContext context) => Theme.of(context).inputDecorationTheme.enabledBorder?.borderSide ?? BorderSide.none;
 
@@ -92,7 +91,7 @@ final class MyHelperWidget {
     final txtController = TextEditingController();
     return await showDialog<T>(
       // showGeneralDialog
-      context: context ?? AppGlobals.context,
+      context: context ?? Globals.context,
       builder: (context) {
         final size = context.mediaQuerySize;
         return ValueListenableBuilder(
@@ -115,9 +114,8 @@ final class MyHelperWidget {
                         margin: const EdgeInsets.all(10),
                         child: TextField(
                           controller: txtController,
-                          onChanged:
-                              (value) =>
-                                  HelperReflect.search(listOrigin: dataValue, listSearch: search, nameModel: 'queryName', keywordSearch: value),
+                          onChanged: (value) =>
+                              HelperReflect.search(listOrigin: dataValue, listSearch: search, nameModel: 'queryName', keywordSearch: value),
                           decoration: InputDecoration(
                             hintText: hintText,
                             prefixIcon: const Icon(Icons.search_rounded),
@@ -129,29 +127,27 @@ final class MyHelperWidget {
                       Expanded(
                         child: ValueListenableBuilder(
                           valueListenable: search,
-                          builder:
-                              (context, searchValue, child) => ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: searchValue.length,
-                                itemBuilder: (context, index) {
-                                  final isSelected = currentSelected == searchValue[index];
+                          builder: (context, searchValue, child) => ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: searchValue.length,
+                            itemBuilder: (context, index) {
+                              final isSelected = currentSelected == searchValue[index];
 
-                                  String queryName = searchValue[index].queryName;
-                                  queryName = queryNameItemBuilder?.call(index, queryName) ?? queryName;
-                                  return ListTile(
-                                    title:
-                                        txtController.text.isEmpty
-                                            ? Text(queryName, style: isSelected ? const TextStyle(fontWeight: FontWeight.bold) : null)
-                                            : RichText(
-                                              text: TextSpan(
-                                                children: HelperWidget.highlightOccurrences(queryName, txtController.text),
-                                                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                                              ),
-                                            ),
-                                    onTap: () => Navigator.of(context).pop(searchValue[index]),
-                                  );
-                                },
-                              ),
+                              String queryName = searchValue[index].queryName;
+                              queryName = queryNameItemBuilder?.call(index, queryName) ?? queryName;
+                              return ListTile(
+                                title: txtController.text.isEmpty
+                                    ? Text(queryName, style: isSelected ? const TextStyle(fontWeight: FontWeight.bold) : null)
+                                    : RichText(
+                                        text: TextSpan(
+                                          children: HelperWidget.highlightOccurrences(queryName, txtController.text),
+                                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                                        ),
+                                      ),
+                                onTap: () => Navigator.of(context).pop(searchValue[index]),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],

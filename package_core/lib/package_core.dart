@@ -4,7 +4,7 @@ library;
 export 'generated/assets.gen.dart';
 export 'generated/env.g.dart';
 export 'src/app/api_url.dart';
-export 'src/app/globals.dart';
+export 'src/app/app_globals.dart';
 export 'src/core/base_datasource.dart';
 export 'src/core/base_view.dart';
 export 'src/core/check_app_view.dart';

@@ -74,34 +74,35 @@ class _ScaffoldCurvedBottomnavViewState extends State<ScaffoldCurvedBottomnavVie
     return CheckAppView(
       child: AutoTabsRouter.builder(
         routes: [const HomeRoute(), const OrdersRoute(), const TrackRoute(), const AccountRoute()],
-        builder:
-            (context, children, tabsRouter) => GestureDetector(
-              //huy keyboard khi bam ngoai man hinh
-              onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
-              child: Scaffold(
-                // resizeToAvoidBottomInset: true,
-                // extendBody: true,
-                extendBodyBehindAppBar: true,
-                extendBody: true,
-                body: Stack(
-                  children:
-                      children.mapIndexed((int index, Widget navigator) {
-                        final isCurrent = index == tabsRouter.activeIndex;
-                        return AnimatedScale(
-                          scale: isCurrent ? 1 : 1.5,
-                          duration: const Duration(milliseconds: 150),
-                          child: AnimatedOpacity(
-                            opacity: isCurrent ? 1 : 0,
-                            duration: const Duration(milliseconds: 150),
-                            child: IgnorePointer(ignoring: !isCurrent, child: TickerMode(enabled: isCurrent, child: navigator)),
-                          ),
-                        );
-                      }).toList(),
-                ),
-                //Footer
-                bottomNavigationBar: BottomNavigationWidget(tabsRouter),
-              ),
+        builder: (context, children, tabsRouter) => GestureDetector(
+          //huy keyboard khi bam ngoai man hinh
+          onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
+          child: Scaffold(
+            // resizeToAvoidBottomInset: true,
+            // extendBody: true,
+            extendBodyBehindAppBar: true,
+            extendBody: true,
+            body: Stack(
+              children: children.mapIndexed((int index, Widget navigator) {
+                final isCurrent = index == tabsRouter.activeIndex;
+                return AnimatedScale(
+                  scale: isCurrent ? 1 : 1.5,
+                  duration: const Duration(milliseconds: 150),
+                  child: AnimatedOpacity(
+                    opacity: isCurrent ? 1 : 0,
+                    duration: const Duration(milliseconds: 150),
+                    child: IgnorePointer(
+                      ignoring: !isCurrent,
+                      child: TickerMode(enabled: isCurrent, child: navigator),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
+            //Footer
+            bottomNavigationBar: BottomNavigationWidget(tabsRouter),
+          ),
+        ),
       ),
     );
   }
@@ -119,17 +120,21 @@ class BottomNavigationWidget extends StatelessWidget {
       // buttonBackgroundColor: Theme.of(context).primaryColor,
       // buttonLabelColor: Colors.white,
       animationDuration: const Duration(milliseconds: 300),
-      height: Globals.isIos ? 80 : 65,
+      height: AppGlobals.isIos ? 80 : 65,
       onTap: (index) => tabsRouter.setActiveIndex(index),
-      items:
-          {"Home": MingCute.home_5_line, "Orders": MingCute.box_3_line, "Track": MingCute.car_line, "Profile": MingCute.user_3_line}.entries
-              .map(
-                (e) => CurvedNavigationBarItem(
-                  icon: Icon(e.value, color: Colors.white, size: 30),
-                  label: Text(e.key, style: const TextStyle(color: Colors.white, fontSize: 12), maxLines: 1, overflow: TextOverflow.ellipsis),
-                ),
-              )
-              .toList(),
+      items: {"Home": MingCute.home_5_line, "Orders": MingCute.box_3_line, "Track": MingCute.car_line, "Profile": MingCute.user_3_line}.entries
+          .map(
+            (e) => CurvedNavigationBarItem(
+              icon: Icon(e.value, color: Colors.white, size: 30),
+              label: Text(
+                e.key,
+                style: const TextStyle(color: Colors.white, fontSize: 12),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }

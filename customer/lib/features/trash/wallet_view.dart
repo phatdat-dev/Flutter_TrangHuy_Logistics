@@ -35,9 +35,18 @@ class _WalletViewState extends State<WalletView> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Add Payment Method', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500)),
-        leading: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black87), onPressed: () => Navigator.of(context).pop()),
-        bottom: PreferredSize(preferredSize: const Size.fromHeight(1.0), child: Container(color: Colors.grey[300], height: 1.0)),
+        title: const Text(
+          'Add Payment Method',
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: Colors.grey[300], height: 1.0),
+        ),
       ),
       body: Column(
         children: [
@@ -49,7 +58,10 @@ class _WalletViewState extends State<WalletView> {
                   // Payment Method Options
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text('Select Payment Method', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                    child: Text(
+                      'Select Payment Method',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                    ),
                   ),
 
                   // Payment Method Cards
@@ -67,12 +79,15 @@ class _WalletViewState extends State<WalletView> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8),
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 4, offset: const Offset(0, 1))],
+                        boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 4, offset: const Offset(0, 1))],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Card Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                          Text(
+                            'Card Details',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                          ),
                           const SizedBox(height: 16),
 
                           // Card Number
@@ -174,7 +189,7 @@ class _WalletViewState extends State<WalletView> {
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -3))],
+              boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, -3))],
             ),
             child: SizedBox(
               width: double.infinity,
@@ -211,14 +226,17 @@ class _WalletViewState extends State<WalletView> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: isSelected ? Colors.blue : Colors.grey[300]!, width: isSelected ? 2 : 1),
-          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 4, offset: const Offset(0, 1))],
+          boxShadow: [BoxShadow(color: Colors.grey.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 4, offset: const Offset(0, 1))],
         ),
         child: Row(
           children: [
             Container(
               width: 48,
               height: 48,
-              decoration: BoxDecoration(color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.grey[100], borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: isSelected ? Colors.blue.withValues(alpha: 0.1) : Colors.grey[100],
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: Icon(icon, color: isSelected ? Colors.blue : Colors.grey[700], size: 24),
             ),
             const SizedBox(width: 16),
@@ -226,7 +244,10 @@ class _WalletViewState extends State<WalletView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                  ),
                   const SizedBox(height: 4),
                   Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
                 ],
@@ -259,7 +280,10 @@ class _WalletViewState extends State<WalletView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey[700])),
+        Text(
+          label,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey[700]),
+        ),
         const SizedBox(height: 8),
         TextField(
           controller: controller,
@@ -270,9 +294,18 @@ class _WalletViewState extends State<WalletView> {
             hintStyle: TextStyle(color: Colors.grey[400]),
             prefixIcon: Icon(prefixIcon, color: Colors.grey[600]),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey[300]!)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey[300]!)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: Colors.blue, width: 2)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey[300]!),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey[300]!),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.blue, width: 2),
+            ),
             filled: true,
             fillColor: Colors.white,
           ),
@@ -322,7 +355,10 @@ class _CardNumberFormatter extends TextInputFormatter {
       }
     }
 
-    return TextEditingValue(text: buffer.toString(), selection: TextSelection.collapsed(offset: buffer.length));
+    return TextEditingValue(
+      text: buffer.toString(),
+      selection: TextSelection.collapsed(offset: buffer.length),
+    );
   }
 }
 
@@ -344,6 +380,9 @@ class _ExpiryDateFormatter extends TextInputFormatter {
       }
     }
 
-    return TextEditingValue(text: buffer.toString(), selection: TextSelection.collapsed(offset: buffer.length));
+    return TextEditingValue(
+      text: buffer.toString(),
+      selection: TextSelection.collapsed(offset: buffer.length),
+    );
   }
 }
